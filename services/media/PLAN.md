@@ -101,7 +101,7 @@ Codegen via **buf** (`buf generate`) — simpler than raw `protoc`. (If you keep
 ## Implementation steps
 
 1. **proto module + codegen.** Write `media.proto`; add `buf.yaml`/`buf.gen.yaml`; init the
-   `proto/` Go module; `buf generate`; create root `go.work` with `services/media` + `proto`.
+   `proto/` Go module; `buf generate`; create root `go.work` with `services/media` + `proto`. ✅
 2. **Core domain & ports.** `domain/media.go` (MediaItem, MediaType, `ErrNotFound`);
    `port/inbound.go`, `port/outbound.go`.
 3. **Core service + unit tests.** `service/media_service.go`; table tests using a fake
