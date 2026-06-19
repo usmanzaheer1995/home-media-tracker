@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#MISE description="Generate Go code from .proto files with buf"
+#
+# Regenerates the gRPC/protobuf Go stubs from the contracts in proto/.
+# Generated code lives in proto/gen/ and is gitignored, so this must run
+# locally before building and in CI before tests/builds.
+set -euo pipefail
+
+cd "${MISE_PROJECT_ROOT}/proto"
+
+buf lint        # style/breaking checks before we generate
+buf generate    # writes gen/<service>/v1/*.pb.go
+go mod tidy     # pull grpc + protobuf runtime into proto/go.mod

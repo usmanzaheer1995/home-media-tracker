@@ -1,0 +1,46 @@
+syntax = "proto3";
+package media.v1;
+option go_package = ".../proto/gen/media/v1;mediav1";
+
+import "google/protobuf/timestamp.proto";
+
+service MediaService {
+  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc GetMedia(GetMediaRequest) returns (GetMediaResponse);
+}
+
+enum MediaType {
+  MEDIA_TYPE_UNSPECIFIED = 0;
+  MEDIA_TYPE_BOOK = 1;
+  MEDIA_TYPE_MOVIE = 2;
+  MEDIA_TYPE_GAME = 3;
+}
+
+message MediaItem {
+  string id = 1;
+  string external_id = 2;
+  MediaType type = 3;
+  string title = 4;
+  repeated string genre = 5;
+  string cover_url = 6;
+  string metadata_json = 7;
+  google.protobuf.Timestamp cached_at=8;
+}
+
+message SearchRequest {
+  string query = 1;
+  MediaType type = 2;
+}
+
+message SearchResponse {
+  repeated MediaItem items = 2;
+}
+
+message GetMediaRequest {
+  string id = 1;
+}
+
+message GetMediaResponse {
+  MediaItem item = 1;
+}
+
